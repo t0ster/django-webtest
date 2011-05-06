@@ -7,10 +7,12 @@ from django.core.handlers.wsgi import WSGIHandler
 from django.core.servers.basehttp import AdminMediaHandler
 from django.db import close_connection
 from django.http import HttpResponseServerError
-from django.test import TestCase
 from django.test.client import store_rendered_templates
 from django.utils.functional import curry
+
 from webtest import TestApp, TestRequest
+
+from django_webtest.conf import DJANGO_WEBTEST_BASE_TESTCASE
 
 
 class DjangoWsgiFix(object):
@@ -106,7 +108,7 @@ class DjangoTestApp(TestApp):
                    upload_files, expect_errors, content_type)
 
 
-class WebTest(TestCase):
+class WebTest(DJANGO_WEBTEST_BASE_TESTCASE):
 
     extra_environ = {}
     csrf_checks = True
